@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        body{
+            width: 970px;
+            height: 900px;
+            border: 2px solid black;
+            overflow: scroll;
+        }
+        #cards{
+            text-align: center;
+            border: 3px solid blue;
+            height: 83%;
+            width: 99.5%;
+            overflow: scroll;
+        }
+        .infoCard{
+            height: 200px;
+            width: 200px;
+            border: 4px solid green;
+            display: inline-block;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('form').submit(function(){
+                var firstName=$('#first_name').val();
+                var lastName=$('#last_name').val();
+                var block=("<div class='infoCard'><h1>" + firstName+" "+ lastName + "</h1>"+"<p>Click for description!</p></div>");
+                $('#cards').append(block);
+                return false;
+            })
+            var clicked=false;
+            $(document).on('click', '.infoCard', function(){
+                var description=$('.description').val();
+                    if(clicked==false){
+                        $(this).children('p').html(description);
+                        clicked=true;
+                    }else{
+                        $(this).children('p').html('<p>Click for description!</p>');
+                        clicked=false;
+                    };
+            });
+        });
+    </script>
+</head>
+<body>    
+    <div>
+        <form>
+            First Name: <input id="first_name" type="text"><br>
+            Last Name: <input id="last_name" type="text"><br>
+            Descriptions: <br><textarea class="description" name="description" cols="30" rows="5"></textarea><br>
+        <button>Add User</button>
+        </form>
+    </div>
+    <div id="cards">
+
+    </div>
+</body>
+</html>
